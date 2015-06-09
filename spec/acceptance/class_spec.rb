@@ -10,14 +10,25 @@ describe 'profile_puppetmaster class' do
       EOS
 
       # Run it twice and test for idempotency
-      apply_manifest(pp, :catch_failures => true)
-      apply_manifest(pp, :catch_changes  => true)
+      apply_manifest(pp, :catch_failures => true, :future_parser => true)
+      apply_manifest(pp, :catch_changes  => true, :future_parser => true)
     end
-
-
   
 # a profile class should test if the included packages and services are installed, enabled and running. Please adept to your needs. See example below:
-   describe package('puppetmaster') do
+    describe package('postgresql-common') do
+      it { is_expected.to be_installed }
+    end
+
+    describe service('postgresql') do
+      it { is_expected.to be_enabled }
+      it { is_expected.to be_running }
+    end
+
+    describe port(5432) do
+      it { should be_listening.with('tcp') }
+    end
+
+    describe package('puppetmaster') do
       it { is_expected.to be_installed }
     end
 
@@ -25,7 +36,10 @@ describe 'profile_puppetmaster class' do
       it { is_expected.to be_enabled }
       it { is_expected.to be_running }
     end
-  
+ 
+    describe port(8140) do
+      it { should be_listening.with('tcp') }
+    end
 
   end
 end

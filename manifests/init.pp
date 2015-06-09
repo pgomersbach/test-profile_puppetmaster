@@ -10,8 +10,18 @@
 class profile_puppetmaster
 {
   # a profile class includes one or more classes, please include below
-  class { 'puppetdb': }
-  class { 'puppet::master':
-    storeconfigs              => true,
+  package { 'puppetmaster':
+    ensure => installed,
   }
+  class { 'puppetdb':
+    disable_ssl => true,
+  }
+  class { 'puppetdb::master::config':
+#    strict_validation => false,
+    puppetdb_server => 'localhost',
+  }
+#  class { 'puppet::master':
+#    storeconfigs               => true,
+#    passenger_high_performance => "on",
+#  }
 }

@@ -4,14 +4,15 @@ fixtures:
 
 # profile module layout, default include ntp module
     ntp: "https://github.com/puppetlabs/puppetlabs-ntp.git"
-    puppet: "https://github.com/stephenrjohnson/puppetmodule.git"
+#    puppet: "https://github.com/stephenrjohnson/puppetmodule.git"
     apache: "https://github.com/puppetlabs/puppetlabs-apache.git"
-    puppetdb: "https://github.com/puppetlabs/puppetlabs-puppetdb.git"
-    postgresql: 'https://github.com/puppetlabs/puppet-postgresql.git'
     firewall: 'https://github.com/puppetlabs/puppetlabs-firewall.git'
     inifile: "https://github.com/puppetlabs/puppetlabs-inifile.git"
     concat: "https://github.com/ripienaar/puppet-concat.git"
     file_concat: "https://github.com/electrical/puppet-lib-file_concat.git"
     apt: "https://github.com/puppetlabs/puppetlabs-apt"
+  forge_modules:
+    postgresql: "puppetlabs/postgresql"
+    puppetdb: "puppetlabs/puppetdb"
   symlinks:
     profile_puppetmaster: "#{source_dir}"

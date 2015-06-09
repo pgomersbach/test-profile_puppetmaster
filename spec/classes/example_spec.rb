@@ -12,8 +12,8 @@ describe 'profile_puppetmaster' do
           let(:params) {{ }}
 
           it { is_expected.to compile.with_all_deps }
-
-  
+          it { is_expected.to contain_class('profile_puppetmaster') }
+          it { is_expected.to contain_package('puppetmaster') }
 
         end
       end

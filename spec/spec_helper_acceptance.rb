@@ -24,10 +24,10 @@ RSpec.configure do |c|
     # Install module and dependencies
     puppet_module_install(:source => proj_root, :module_name => 'profile_puppetmaster')
     hosts.each do |host|
-      on host ,shell('mkdir /tmp/modules')
+      on host, shell('mkdir /tmp/modules')
       scp_to host, "#{proj_root}/spec/fixtures/modules/", "/tmp", {:ignore => ["profile_puppetmaster", ".bundle", ".git", ".idea", ".vagrant", ".vendor", "vendor", "acceptance", "bundle", "spec", "tests", "log", ".", ".."]}
       on host, shell('mv /tmp/modules/* /etc/puppet/modules')
-      on host, puppet('module', 'install', 'puppetlabs-stdlib'), { :acceptable_exit_codes => [0,1] }
+#      on host, puppet('module', 'install', 'puppetlabs-stdlib'), { :acceptable_exit_codes => [0,1] }
     end
   end
 end

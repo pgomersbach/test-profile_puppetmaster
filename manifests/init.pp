@@ -10,18 +10,33 @@
 class profile_puppetmaster
 {
   # a profile class includes one or more classes, please include below
-  package { 'puppetmaster':
+  include apt
+  include apt::update
+
+  apt::source { 'puppetlabs':
+    location   => 'http://apt.puppetlabs.com',
+    key        => '47B320EB4C7C375AA9DAE1A01054B7A24BD6EC30',
+    key_server => 'pgp.mit.edu',
+  }
+
+  package { 'puppet':
     ensure => installed,
   }
+
+  package { 'puppetmaster':
+    ensure  => installed,
+    require => Apt::Source['puppetlabs'],
+  }
+
   class { 'puppetdb':
-    disable_ssl => true,
+    listen_address => '0.0.0.0',
+    require        => Apt::Source['puppetlabs'],
   }
+
   class { 'puppetdb::master::config':
-#    strict_validation => false,
-    puppetdb_server => 'localhost',
+    puppetdb_soft_write_failure => 'true',
+    strict_validation           => false,
+    puppetdb_startup_timeout    => '300',
+    require                     => Apt::Source['puppetlabs'],
   }
-#  class { 'puppet::master':
-#    storeconfigs               => true,
-#    passenger_high_performance => "on",
-#  }
 }

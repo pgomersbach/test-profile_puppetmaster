@@ -15,6 +15,10 @@ describe 'profile_puppetmaster class' do
     end
   
 # a profile class should test if the included packages and services are installed, enabled and running. Please adept to your needs. See example below:
+    describe host( host_inventory['fqdn'] ) do
+      it { is_expected.to be_present }
+    end
+
     describe package('postgresql-common') do
       it { is_expected.to be_installed }
     end
@@ -28,17 +32,13 @@ describe 'profile_puppetmaster class' do
       it { should be_listening.with('tcp') }
     end
 
-    describe package('puppetmaster') do
+    describe package('puppetmaster-passenger') do
       it { is_expected.to be_installed }
     end
 
-    describe service('puppetmaster') do
+    describe service('apache2') do
       it { is_expected.to be_enabled }
       it { is_expected.to be_running }
-    end
- 
-    describe port(8140) do
-      it { should be_listening.with('tcp') }
     end
 
   end

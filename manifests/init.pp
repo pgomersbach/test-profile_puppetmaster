@@ -13,29 +13,32 @@ class profile_puppetmaster
   include apt
   include apt::update
 
+  host { $::fqdn:
+    ip => $::ipaddress,
+  }
+
   apt::source { 'puppetlabs':
     location   => 'http://apt.puppetlabs.com',
-    key        => '47B320EB4C7C375AA9DAE1A01054B7A24BD6EC30',
-    key_server => 'pgp.mit.edu',
+    key      => {
+      id     => '47B320EB4C7C375AA9DAE1A01054B7A24BD6EC30',
+      server => 'pgp.mit.edu',
+    },
   }
 
-  package { 'puppet':
-    ensure => installed,
-  }
-
-  package { 'puppetmaster':
+  package { 'puppetmaster-passenger':
     ensure  => installed,
     require => Apt::Source['puppetlabs'],
   }
 
   class { 'puppetdb':
     listen_address => '0.0.0.0',
-    require        => Apt::Source['puppetlabs'],
+    require        => [ Apt::Source['puppetlabs'], Host[ $::fqdn ] ],
   }
 
   class { 'puppetdb::master::config':
     puppetdb_soft_write_failure => 'true',
-    strict_validation           => false,
+    puppet_service_name         => 'apache2',
+    strict_validation           => true,
     puppetdb_startup_timeout    => '300',
     require                     => Apt::Source['puppetlabs'],
   }

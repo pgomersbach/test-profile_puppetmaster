@@ -40,6 +40,7 @@ class profile_puppetmaster
     puppet_service_name         => 'apache2',
     strict_validation           => true,
     puppetdb_startup_timeout    => '300',
+    terminus_package            => 'puppetdb-terminus',
     require                     => Apt::Source['puppetlabs'],
   }
 }

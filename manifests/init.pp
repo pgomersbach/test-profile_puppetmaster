@@ -38,7 +38,7 @@ class profile_puppetmaster
   class { 'puppetdb::master::config':
     puppetdb_soft_write_failure => 'true',
     puppet_service_name         => 'apache2',
-    strict_validation           => true,
+    strict_validation           => false,
     puppetdb_startup_timeout    => '300',
     terminus_package            => 'puppetdb-terminus',
     require                     => Apt::Source['puppetlabs'],

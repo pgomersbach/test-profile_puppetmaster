@@ -4,7 +4,6 @@ fixtures:
 
 # profile module layout, default include ntp module
     ntp: "https://github.com/puppetlabs/puppetlabs-ntp.git"
-#    puppet: "https://github.com/stephenrjohnson/puppetmodule.git"
     apache: "https://github.com/puppetlabs/puppetlabs-apache.git"
     firewall: 'https://github.com/puppetlabs/puppetlabs-firewall.git'
     inifile: "https://github.com/puppetlabs/puppetlabs-inifile.git"

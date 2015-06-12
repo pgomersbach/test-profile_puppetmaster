@@ -18,7 +18,7 @@ class profile_puppetmaster
   }
 
   apt::source { 'puppetlabs':
-    location   => 'http://apt.puppetlabs.com',
+    location => 'http://apt.puppetlabs.com',
     key      => {
       id     => '47B320EB4C7C375AA9DAE1A01054B7A24BD6EC30',
       server => 'pgp.mit.edu',
@@ -36,7 +36,7 @@ class profile_puppetmaster
   }
 
   class { 'puppetdb::master::config':
-    puppetdb_soft_write_failure => 'true',
+    puppetdb_soft_write_failure => true,
     puppet_service_name         => 'apache2',
     strict_validation           => false,
     puppetdb_startup_timeout    => '300',

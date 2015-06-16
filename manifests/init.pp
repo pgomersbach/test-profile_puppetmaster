@@ -14,7 +14,8 @@ class profile_puppetmaster
   include apt::update
 
   host { $::fqdn:
-    ip => $::ipaddress,
+    ip           => $::ipaddress,
+    host_aliases => 'puppet',
   }
 
   apt::source { 'puppetlabs':

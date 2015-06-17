@@ -12,5 +12,7 @@ fixtures:
     file_concat: "https://github.com/electrical/puppet-lib-file_concat.git"
     apt: "https://github.com/puppetlabs/puppetlabs-apt"
     concat: "git://github.com/puppetlabs/puppetlabs-concat"
+    rspec_monitor: "git://github.com/pgomersbach/test-rspec_monitor.git"
+
   symlinks:
     profile_puppetmaster: "#{source_dir}"

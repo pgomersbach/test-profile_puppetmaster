@@ -1,11 +1,8 @@
-require 'beaker-rspec/spec_helper'
-require 'beaker-rspec/helpers/serverspec'
-require 'spec_helper_acceptance'
 
-
-if (defined?(host)).nil?
+if (defined?(hosts)).nil?
   puts "host not definedi, running production?"
 else
+  require 'spec_helper_acceptance'
   puts "host is defined, running in BEAKER?"
 end
 
@@ -13,7 +10,7 @@ end
 describe 'profile_puppetmaster class' do
 
   context 'default parameters' do
-  if (defined?(host)).nil?
+  if (defined?(hosts)).nil?
     puts "skip puppet idempotently test"
   else
     # Using puppet_apply as a helper

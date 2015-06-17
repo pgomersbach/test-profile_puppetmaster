@@ -1,12 +1,6 @@
 require 'beaker-rspec/spec_helper'
 require 'beaker-rspec/helpers/serverspec'
 
-if (defined?(hosts)).nil?
-  puts "host not definedi, running production?"
-else
-  puts "host is defined, running in BEAKER?"
-end
-
 unless ENV['BEAKER_provision'] == 'no'
   hosts.each do |host|
     # Install Puppet

@@ -1,4 +1,4 @@
-
+require 'beaker-rspec/spec_helper'
 if (defined?(hosts)).nil?
   require 'serverspec'
   set :backend, :exec

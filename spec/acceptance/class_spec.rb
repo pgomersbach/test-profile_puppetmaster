@@ -1,29 +1,31 @@
 
 if (defined?(hosts)).nil?
-  puts "host not definedi, running production?"
+  require 'serverspec'
+  set :backend, :exec
+  puts "host not defined, running production"
 else
-  require 'spec_helper_acceptance'
-  puts "host is defined, running in BEAKER?"
+  require 'spec_helper'
+  puts "host is defined, running in BEAKER"
 end
 
 
 describe 'profile_puppetmaster class' do
 
   context 'default parameters' do
-  if (defined?(hosts)).nil?
-    puts "skip puppet idempotently test"
-  else
-    # Using puppet_apply as a helper
-    it 'should work idempotently with no errors' do
-      pp = <<-EOS
-      class { 'profile_puppetmaster': }
-      EOS
+    if (defined?(hosts)).nil?
+      puts "skip puppet idempotently test"
+    else
+      # Using puppet_apply as a helper
+      it 'should work idempotently with no errors' do
+        pp = <<-EOS
+        class { 'profile_puppetmaster': }
+        EOS
 
-      # Run it twice and test for idempotency
-      apply_manifest(pp, :catch_failures => true, :future_parser => true)
-      apply_manifest(pp, :catch_changes  => true, :future_parser => true)
+        # Run it twice and test for idempotency
+        apply_manifest(pp, :catch_failures => true, :future_parser => true)
+        apply_manifest(pp, :catch_changes  => true, :future_parser => true)
+      end
     end
-  end
 # a profile class should test if the included packages and services are installed, enabled and running. Please adept to your needs. See example below:
 
     describe package('postgresql-common') do

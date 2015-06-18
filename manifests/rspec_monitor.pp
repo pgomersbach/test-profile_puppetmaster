@@ -5,6 +5,8 @@
 class profile_puppetmaster::rspec_monitor {
   include ::rspec_monitor
 
-  rspec_monitor::add_tests { $module_name: }
+  rspec_monitor::add_tests { $module_name:
+    require => Class['profile_puppetmaster'],
+  }
 
 }

@@ -1,10 +1,10 @@
 if ENV['BEAKER'] == 'true'
-  puts "running in BEAKER"
+  # running in BEAKER test environment
   require 'spec_helper_acceptance'
 else
+  # running in production
   require 'serverspec'
   set :backend, :exec
-  puts "running production"
 end
 
 

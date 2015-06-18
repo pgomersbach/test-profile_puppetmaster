@@ -48,12 +48,6 @@ end
 # end
 
 task :setbeaker_env do
-  basedir = File.dirname(__FILE__)
-  moddir = File.basename(Dir.getwd)
-  modname = moddir.split("-").last
-  puts basedir + '/spec/fixtures/modules/' + modname
-  puts modname
-  system("echo setbeker")
   system("BEAKER=true rake beaker")
 end
 
@@ -61,8 +55,7 @@ desc "Run beaker using rspec .fixtures.yml."
 task :beaker_fixtures => [
   :spec_prep,
   :setbeaker_env,
-#  :beaker,
-#  :spec_clean,
+  :spec_clean,
 ]
 
 desc "Run syntax, lint, and spec tests."

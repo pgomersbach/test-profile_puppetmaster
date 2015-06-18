@@ -1,20 +1,17 @@
-require 'beaker-rspec/spec_helper'
-if (defined?(hosts)).nil?
+if ENV['BEAKER'] == 'true'
+  puts "running in BEAKER"
+  require 'spec_helper_acceptance'
+else
   require 'serverspec'
   set :backend, :exec
-  puts "host not defined, running production"
-else
-  require 'spec_helper'
-  puts "host is defined, running in BEAKER"
+  puts "running production"
 end
 
 
 describe 'profile_puppetmaster class' do
 
   context 'default parameters' do
-    if (defined?(hosts)).nil?
-      puts "skip puppet idempotently test"
-    else
+    if ENV['BEAKER'] == 'true'
       # Using puppet_apply as a helper
       it 'should work idempotently with no errors' do
         pp = <<-EOS

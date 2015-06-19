@@ -53,9 +53,9 @@ end
 
 desc "Run beaker using rspec .fixtures.yml."
 task :beaker_fixtures => [
+  :spec_clean,
   :spec_prep,
   :setbeaker_env,
-  :spec_clean,
 ]
 
 desc "Run syntax, lint, and spec tests."

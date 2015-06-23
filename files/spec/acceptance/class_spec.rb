@@ -23,7 +23,7 @@ describe 'profile_puppetmaster class' do
         apply_manifest(pp, :catch_changes  => true, :future_parser => true)
       end
     end
-# a profile class should test if the included packages and services are installed, enabled and running. Please adept to your needs. See example below:
+  # a profile class should test if the included packages and services are installed, enabled and running. Please adept to your needs. See example below:
 
     describe package('postgresql-common') do
       it { is_expected.to be_installed }

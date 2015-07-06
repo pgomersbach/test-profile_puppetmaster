@@ -18,9 +18,10 @@ describe 'profile_puppetmaster class' do
         class { 'profile_puppetmaster': }
         EOS
 
-        # Run it twice and test for idempotency
         apply_manifest(pp, :catch_failures => true, :future_parser => true)
-        apply_manifest(pp, :catch_changes  => true, :future_parser => true)
+        sleep(10) # Puppetdb takes a while to start up
+        apply_manifest(pp, :catch_failures => true, :future_parser => true)
+
       end
     end
   # a profile class should test if the included packages and services are installed, enabled and running. Please adept to your needs. See example below:
@@ -51,9 +52,17 @@ describe 'profile_puppetmaster class' do
       it { is_expected.to be_running }
     end
 
+    describe port(8080) do
+      it { should be_listening.with('tcp') }
+    end
+
     describe service('apache2') do
       it { is_expected.to be_enabled }
       it { is_expected.to be_running }
+    end
+
+    describe port(8140) do
+      it { should be_listening.with('tcp') }
     end
 
   end

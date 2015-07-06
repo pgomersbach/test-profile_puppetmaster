@@ -29,6 +29,7 @@ class profile_puppetmaster
 
   class { 'puppetdb':
     listen_address => '0.0.0.0',
+    confdir        => '/etc/puppetdb/conf.d',
     require        => [ Apt::Source['puppetlabs'], Host[ $::fqdn ] ],
   }
 

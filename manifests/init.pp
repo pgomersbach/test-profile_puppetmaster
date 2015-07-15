@@ -29,7 +29,9 @@ class profile_puppetmaster
     require => Apt::Source['puppetlabs'],
   }
 
-  class { 'puppetdb::globals': }
+  class { 'puppetdb::globals':
+    version => '2.3.5-1puppetlabs1',
+  }
 
   class { 'puppetdb':
     listen_address => '0.0.0.0',
@@ -43,6 +45,8 @@ class profile_puppetmaster
     puppet_service_name         => 'apache2',
     strict_validation           => false,
     puppetdb_startup_timeout    => '300',
+    manage_report_processor     => true,
+    enable_reports              => true,
     terminus_package            => 'puppetdb-terminus',
     require                     => Apt::Source['puppetlabs'],
   }

@@ -12,6 +12,8 @@ class profile_puppetmaster
   # a profile class includes one or more classes, please include below
   include apt
   include apt::update
+  # update apt sources before installing packages
+  Apt::Source <| |> -> Package <| |>
 
   host { $::fqdn:
     ip           => $::ipaddress,

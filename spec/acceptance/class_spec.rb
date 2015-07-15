@@ -52,7 +52,7 @@ describe 'profile_puppetmaster class' do
       it { is_expected.to be_running }
     end
 
-    describe port(8080) do
+    describe port(8081) do
       it { should be_listening.with('tcp') }
     end
 

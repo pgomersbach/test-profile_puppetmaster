@@ -33,6 +33,7 @@ class profile_puppetmaster
 
   class { 'puppetdb':
     listen_address => '0.0.0.0',
+    listen_port    => '8081',
     confdir        => '/etc/puppetdb/conf.d',
     require        => [ Apt::Source['puppetlabs'], Host[ $::fqdn ] ],
   }
@@ -44,5 +45,11 @@ class profile_puppetmaster
     puppetdb_startup_timeout    => '300',
     terminus_package            => 'puppetdb-terminus',
     require                     => Apt::Source['puppetlabs'],
+  }
+
+  exec { 'configure_ssl_from_puppet':
+    command => '/usr/sbin/puppetdb ssl-setup',
+    creates => '/etc/puppetdb/ssl/private.pem',
+    require => Class['puppetdb'],
   }
 }

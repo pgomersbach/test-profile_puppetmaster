@@ -30,7 +30,7 @@ class profile_puppetmaster
   }
 
   class { 'puppetdb::globals':
-    version => '2.3.5-1puppetlabs1',
+    version => '2.3.6-1puppetlabs1',
   }
 
   class { 'puppetdb':

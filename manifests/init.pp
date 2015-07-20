@@ -47,7 +47,7 @@ class profile_puppetmaster
     manage_report_processor     => true,
     enable_reports              => true,
     terminus_package            => 'puppetdb-terminus',
-    require                     => Apt::Source['puppetlabs'],
+    require                     => Class['puppetdb'],
   }
 
   exec { 'configure_ssl_from_puppet':

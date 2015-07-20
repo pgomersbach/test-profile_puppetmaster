@@ -18,7 +18,7 @@ describe 'profile_puppetmaster' do
           it { is_expected.to contain_apt__source('puppetlabs') }
           it { is_expected.to contain_package('puppetmaster-passenger').that_requires('Apt::source[puppetlabs]') }
           it { is_expected.to contain_class('puppetdb').that_requires('Apt::source[puppetlabs]') }
-          it { is_expected.to contain_class('puppetdb::master::config').that_requires('Apt::source[puppetlabs]') }
+          it { is_expected.to contain_class('puppetdb::master::config').that_requires('Class[puppetdb]') }
          
         end
       end

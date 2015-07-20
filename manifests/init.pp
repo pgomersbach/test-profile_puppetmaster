@@ -29,9 +29,9 @@ class profile_puppetmaster
     require => Apt::Source['puppetlabs'],
   }
 
-  class { 'puppetdb::globals':
-    version => '2.3.6-1puppetlabs1',
-  }
+#  class { 'puppetdb::globals':
+#    version => '2.3.6-1puppetlabs1',
+#  }
 
   class { 'puppetdb':
     listen_address => '0.0.0.0',

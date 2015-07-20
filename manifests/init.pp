@@ -33,9 +33,9 @@ class profile_puppetmaster
     ensure => installed,
   }
 
-  class { 'puppetdb::globals':
-    version => 'latest',
-  }
+#  class { 'puppetdb::globals':
+#    version => 'latest',
+#  }
 
   class { 'puppetdb':
     listen_address => '0.0.0.0',

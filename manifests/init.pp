@@ -17,7 +17,7 @@ class profile_puppetmaster
 
   host { $::fqdn:
     ip           => $::ipaddress,
-    host_aliases => 'puppet',
+    host_aliases => [ 'puppet', $::hostname ],
   }
 
 #  apt::source { 'puppetlabs':

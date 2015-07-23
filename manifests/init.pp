@@ -20,43 +20,21 @@ class profile_puppetmaster
     host_aliases => [ 'puppet', $::hostname ],
   }
 
-#  apt::source { 'puppetlabs':
-#    location => 'http://apt.puppetlabs.com',
-#  }
-
-#  package { 'puppetmaster-passenger':
-#    ensure  => installed,
-#    require => Apt::Source['puppetlabs'],
-#  }
-
   package { 'puppetserver':
     ensure => installed,
   }
 
-#  class { 'puppetdb::globals':
-#    version => 'latest',
-#  }
-
   class { 'puppetdb':
     listen_address => '0.0.0.0',
-#    confdir        => '/etc/puppetdb/conf.d',
-#    require        => [ Apt::Source['puppetlabs'], Host[ $::fqdn ] ],
   }
 
   class { 'puppetdb::master::config':
     puppetdb_soft_write_failure => true,
-#    puppet_service_name         => 'apache2',
     strict_validation           => false,
     puppetdb_startup_timeout    => '300',
     manage_report_processor     => true,
     enable_reports              => true,
-#    terminus_package            => 'puppetdb-terminus',
     require                     => Class['puppetdb'],
   }
 
-#  exec { 'configure_ssl_from_puppet':
-#    command => '/usr/sbin/puppetdb ssl-setup',
-#    creates => '/etc/puppetdb/ssl/private.pem',
-#    require => Class['puppetdb'],
-#  }
 }

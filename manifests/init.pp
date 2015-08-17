@@ -12,6 +12,7 @@ class profile_puppetmaster
   # a profile class includes one or more classes, please include below
   include apt
   include apt::update
+  include java
   # update apt sources before installing packages
   Apt::Source <| |> -> Package <| |>
 

@@ -35,6 +35,7 @@ class profile_puppetmaster
     puppetdb_startup_timeout    => '300',
     manage_report_processor     => true,
     enable_reports              => true,
+    terminus_package            => 'puppetdb-terminus',
     require                     => Class['puppetdb'],
   }
 

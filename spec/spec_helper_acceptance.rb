@@ -7,7 +7,8 @@ unless ENV['BEAKER_provision'] == 'no'
     if host.is_pe?
       install_pe
     else
-      install_puppet
+      install_puppet( :version => '1.2.2' )
+#      install_puppet
     end
   end
 end
@@ -26,7 +27,7 @@ RSpec.configure do |c|
     hosts.each do |host|
       on host, shell('mkdir /tmp/modules')
       scp_to host, "#{proj_root}/spec/fixtures/modules/", "/tmp", {:ignore => ["profile_puppetmaster", ".bundle", ".git", ".idea", ".vagrant", ".vendor", "vendor", "bundle", "tests", "log", ".", ".."]}
-      on host, shell('mv /tmp/modules/* /etc/puppet/modules')
+      on host, shell('mv /tmp/modules/* /etc/puppetlabs/code/modules')
     end
   end
 end

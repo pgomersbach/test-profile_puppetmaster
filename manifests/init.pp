@@ -25,6 +25,11 @@ class profile_puppetmaster
     ensure => installed,
   }
 
+  service { 'puppetserver':
+    ensure => running,
+    enable => true,
+  }
+
   class { 'puppetdb':
     listen_address => '0.0.0.0',
   }

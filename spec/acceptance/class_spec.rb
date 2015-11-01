@@ -18,9 +18,9 @@ describe 'profile_puppetmaster class' do
         class { 'profile_puppetmaster': }
         EOS
 
-        apply_manifest(pp, :catch_failures => true, :future_parser => true)
+        apply_manifest(pp, :catch_failures => true)
         sleep(10) # Puppetdb takes a while to start up
-        apply_manifest(pp, :catch_failures => true, :future_parser => true)
+        apply_manifest(pp, :catch_failures => true)
 
       end
     end
@@ -39,10 +39,6 @@ describe 'profile_puppetmaster class' do
       it { should be_listening.with('tcp') }
     end
 
-    describe package('puppetmaster-passenger') do
-      it { is_expected.to be_installed }
-    end
-
     describe package('puppetdb') do
       it { is_expected.to be_installed }
     end
@@ -52,11 +48,15 @@ describe 'profile_puppetmaster class' do
       it { is_expected.to be_running }
     end
 
-    describe port(8081) do
+    describe port(8080) do
       it { should be_listening.with('tcp') }
     end
 
-    describe service('apache2') do
+    describe package('puppetserver') do
+      it { is_expected.to be_installed }
+    end
+
+    describe service('puppetserver') do
       it { is_expected.to be_enabled }
       it { is_expected.to be_running }
     end

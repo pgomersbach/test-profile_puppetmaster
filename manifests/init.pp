@@ -25,6 +25,12 @@ class profile_puppetmaster
     ensure => installed,
   }
 
+  file { '/usr/bin/puppet':
+    ensure  => link,
+    target  => '/opt/puppetlabs/bin/puppet',
+    require => Package['puppetserver'],
+  }
+
   service { 'puppetserver':
     ensure => running,
     enable => true,
